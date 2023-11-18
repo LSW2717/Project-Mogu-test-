@@ -11,6 +11,9 @@ conn = mysql.connector.connect(
 )
 cursor = conn.cursor()
 
+# 대회 분류 샘플 데이터
+categories = ['해커톤', '디자인', '코딩', '미술']
+
 for _ in range(10000):
     name = f"{fake.word().capitalize()} 대회"
     category = random.choice(categories)

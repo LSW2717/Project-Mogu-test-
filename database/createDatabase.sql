@@ -1,5 +1,4 @@
-create database moguTest;
-use moguTest;
+
 CREATE TABLE user (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
