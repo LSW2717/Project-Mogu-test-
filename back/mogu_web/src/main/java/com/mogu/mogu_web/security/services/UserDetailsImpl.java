@@ -4,6 +4,7 @@ package com.mogu.mogu_web.security.services;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mogu.mogu_web.entity.User;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Getter
+@Setter
 public class UserDetailsImpl implements UserDetails {
 
     @Serial

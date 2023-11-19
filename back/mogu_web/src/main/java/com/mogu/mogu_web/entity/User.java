@@ -1,6 +1,7 @@
 package com.mogu.mogu_web.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,6 +39,7 @@ public class User {
 
     @NotBlank
     @Column(name = "email", length = 100)
+    @Email
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
