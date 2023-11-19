@@ -1,33 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'mainPage/view/start_page.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(MoguWeb());
 }
 
-class MyApp extends StatelessWidget {
+class MoguWeb extends StatelessWidget {
+  const MoguWeb({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Web Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(),
-    );
+      title: 'Mogu Web Page',
+      home: StartPage(),
+      );
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Page'),
-      ),
-      body: Center(
-        child: Text('Hello, Flutter Web!'),
-      ),
-    );
-  }
-}
