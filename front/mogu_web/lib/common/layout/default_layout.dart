@@ -20,13 +20,13 @@ class DefaultLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor ?? Colors.white,
-      appBar: renderAppBar(),
-      body: child,
+      appBar: defaultAppBar(),
+      body:child,
       bottomNavigationBar: bottomNavigationBar,
     );
   }
 
-  AppBar? renderAppBar(){
+  AppBar? defaultAppBar(){
     if(title == null){
       return null;
     }else{
@@ -34,19 +34,24 @@ class DefaultLayout extends StatelessWidget {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'mogu',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 34,
-                fontFamily: 'Pretendard',
-                fontWeight: FontWeight.w700,
-                height: 0,
+            Padding(
+              padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
+              child: Text(
+                'mogu',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 34,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
               ),
             ),
           ],
         ),
+        automaticallyImplyLeading: false,
         backgroundColor: Color(0xFF005BAC),
+        toolbarHeight: 76,
       );
     }
   }

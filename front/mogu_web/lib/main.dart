@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-
-import 'mainPage/view/start_page.dart';
+import 'common/router/router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
-  runApp(MoguWeb());
+  runApp(
+    ProviderScope(child: MoguWeb()), // ProviderScope 추가
+  );
 }
 
 class MoguWeb extends StatelessWidget {
@@ -11,10 +13,9 @@ class MoguWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Mogu Web Page',
-      home: StartPage(),
-      );
+      routerConfig: router,
+    );
   }
 }
-
