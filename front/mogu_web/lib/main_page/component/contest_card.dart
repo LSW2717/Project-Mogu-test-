@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mogu_web/login_page/view/login_page_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:intl/intl.dart';
 
@@ -12,11 +13,14 @@ class ContestCard extends StatelessWidget {
   //url
   final String url;
 
+  final VoidCallback? onTap;
+
   const ContestCard(
       {required this.name,
       required this.category,
       required this.endDate,
       required this.url,
+      this.onTap,
       super.key});
 
   @override
@@ -32,13 +36,7 @@ class ContestCard extends StatelessWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () async {
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(Uri.parse(url));
-                } else {
-                  throw 'Could not launch $url';
-                }
-              },
+              onTap: onTap,
               borderRadius: BorderRadius.circular(20),
               child: Container(
                 width: 361,

@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -38,7 +39,6 @@ public class UserService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
     private final RefreshTokenService refreshTokenService;
-
     @Transactional
     public void registerNewUser(UserRequestDto userRequestDto) {
         if (userRepository.existsByUsername(userRequestDto.getUsername())) {
@@ -110,8 +110,12 @@ public class UserService {
         return new JwtResponseDto(jwt,
                 refreshToken.getToken(),
                 userDetails.getId(),
+                userDetails.getName(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
                 roles);
+    }
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 }

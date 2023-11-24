@@ -29,8 +29,11 @@ public class RefreshTokenService {
     }
 
     public RefreshToken createRefreshToken(Long userId) {
-        RefreshToken refreshToken = new RefreshToken();
+        Optional<RefreshToken> existingToken = refreshTokenRepository.findByUserId(userId);
+        // 기존 토큰이 있다면 삭제
+        existingToken.ifPresent(refreshTokenRepository::delete);
 
+        RefreshToken refreshToken = new RefreshToken();
         refreshToken.setUser(userRepository.findById(userId).get());
         refreshToken.setExpiryDate(Instant.now().plusMillis(refreshTokenDurationMs));
         refreshToken.setToken(UUID.randomUUID().toString());

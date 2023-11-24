@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mogu_web/login_page/viewModel/auth_view_model.dart';
 
-class DefaultLayout extends StatelessWidget {
+class DefaultLayout extends ConsumerWidget {
   final Color? backgroundColor;
   final Widget child;
   final String? title;
@@ -17,22 +19,23 @@ class DefaultLayout extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState = ref.watch(authViewModelProvider);
     return Scaffold(
       backgroundColor: backgroundColor ?? Colors.white,
-      appBar: defaultAppBar(),
+      appBar: defaultAppBar(authState.user?.name),
       body:child,
       bottomNavigationBar: bottomNavigationBar,
     );
   }
 
-  AppBar? defaultAppBar(){
+  AppBar? defaultAppBar(String? userName){
     if(title == null){
       return null;
     }else{
       return AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
@@ -41,6 +44,19 @@ class DefaultLayout extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 34,
+                  fontFamily: 'Pretendard',
+                  fontWeight: FontWeight.w700,
+                  height: 0,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
+              child: Text(
+                userName != null ? "안녕하세요 $userName님!" : "로그인 후 사용가능합니다.",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 25,
                   fontFamily: 'Pretendard',
                   fontWeight: FontWeight.w700,
                   height: 0,
