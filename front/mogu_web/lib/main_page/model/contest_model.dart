@@ -13,6 +13,7 @@ class ContestModel {
   )
   final DateTime endDate;
   final String url;
+  final String imgUrl;
 
   ContestModel({
     required this.id,
@@ -20,6 +21,7 @@ class ContestModel {
     required this.category,
     required this.endDate,
     required this.url,
+    required this.imgUrl
   });
 
   factory ContestModel.fromJson(Map<String, dynamic> json) =>

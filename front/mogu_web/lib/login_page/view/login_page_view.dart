@@ -7,7 +7,6 @@ import '../component/custom_text_form_field.dart';
 import '../viewModel/auth_view_model.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
-  static String get routeName => 'login';
 
   const LoginPage({Key? key}) : super(key: key);
 
@@ -85,6 +84,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   username = value;
                 },
                 obscureText: false,
+                textInputAction: TextInputAction.next,
               ),
             ),
             Padding(
@@ -95,9 +95,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   password = value;
                 },
                 obscureText: true,
+                textInputAction: TextInputAction.done, // Enter 키를 누르면 로그인 시도
+                onFieldSubmitted: (value) => _login(),
               ),
             ),
-            SizedBox(height: 70),
+            SizedBox(height: 50),
             LoginButton(
               onLoginPressed: _login,
             ),

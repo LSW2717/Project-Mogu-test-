@@ -12,6 +12,7 @@ ContestModel _$ContestModelFromJson(Map<String, dynamic> json) => ContestModel(
       category: json['category'] as String,
       endDate: DataUtils.stringToDateTime(json['endDate'] as String),
       url: json['url'] as String,
+      imgUrl: json['imgUrl'] as String,
     );
 
 Map<String, dynamic> _$ContestModelToJson(ContestModel instance) =>
@@ -21,4 +22,5 @@ Map<String, dynamic> _$ContestModelToJson(ContestModel instance) =>
       'category': instance.category,
       'endDate': instance.endDate.toIso8601String(),
       'url': instance.url,
+      'imgUrl': instance.imgUrl,
     };

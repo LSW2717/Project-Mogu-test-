@@ -7,7 +7,6 @@ import '../../login_page/view/login_page_view.dart';
 import '../viewModel/signup_view_model.dart';
 
 class SignUpPage extends ConsumerStatefulWidget {
-
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
@@ -19,21 +18,21 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
   String username = '';
   String password = '';
   String email = '';
+  final _formKey = GlobalKey<FormState>();
 
   Future<void> _signup() async {
     final signupViewModel = ref.read(signupViewModelProvider.notifier);
     try {
-      await signupViewModel.signup(name: name, username: username, password: password, email: email);
+      await signupViewModel.signup(
+          name: name, username: username, password: password, email: email);
       // 메인 페이지로 이동
-
     } catch (e) {
       // 로그인 실패 시의 처리
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    final signupState = ref.watch(signupViewModelProvider);
-
     return AlertDialog(
       backgroundColor: Colors.transparent,
       content: Container(
@@ -53,78 +52,117 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
             )
           ],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            SizedBox(
-              width: 192,
-              child: Text(
-                '회원가입',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w500,
-                  height: 0.11,
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        context.pop();
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => LoginPage(),
+                        );
+                      },
+                      child: Text(
+                        '이전',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontFamily: 'Pretendard',
+                          fontWeight: FontWeight.w500,
+                          height: 1,
+                        ),
+                      )),
+                ],
+              ),
+              SizedBox(
+                width: 192,
+                child: Text(
+                  '회원가입',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontFamily: 'Pretendard',
+                    fontWeight: FontWeight.w500,
+                    height: 0.11,
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 20),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 4, 16, 4), // 내부 여백 설정
-              child: CustomTextFormField(
-                hintText: '  이름를 입력해주세요.',
-                onChanged: (String value) {
-                  name = value;
-                },
-                obscureText: false,
+              SizedBox(height: 15),
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 4, 16, 4), // 내부 여백 설정
+                child: CustomTextFormField(
+                  hintText: '  이름를 입력해주세요.',
+                  onChanged: (String value) {
+                    name = value;
+                  },
+                  obscureText: false,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 4, 16, 4), // 내부 여백 설정
-              child: CustomTextFormField(
-                hintText: '  아이디를 입력해주세요.',
-                onChanged: (String value) {
-                  username = value;
-                },
-                obscureText: false,
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 4, 16, 4), // 내부 여백 설정
+                child: CustomTextFormField(
+                  hintText: '  아이디를 입력해주세요.',
+                  onChanged: (String value) {
+                    username = value;
+                  },
+                  obscureText: false,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
-              child: CustomTextFormField(
-                hintText: '  비밀번호를 입력해주세요.',
-                onChanged: (String value) {
-                  password = value;
-                },
-                obscureText: true,
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
+                child: CustomTextFormField(
+                  hintText: '  비밀번호를 입력해주세요.',
+                  onChanged: (String value) {
+                    password = value;
+                  },
+                  obscureText: true,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(16, 4, 16, 4), // 내부 여백 설정
-              child: CustomTextFormField(
-                hintText: '  이메일를 입력해주세요.',
-                onChanged: (String value) {
-                  email = value;
-                },
-                obscureText: false,
+              Padding(
+                padding: EdgeInsets.fromLTRB(16, 4, 16, 4), // 내부 여백 설정
+                child: CustomTextFormField(
+                  onChanged: (String value) {
+                    email = value;
+                  },
+                  validator: (value) {
+                    // 이메일 형식 검증 로직
+                    if (value == null || value.isEmpty) {
+                      return '이메일을 입력해주세요.';
+                    } else if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                      return '유효한 이메일 형식이 아닙니다.';
+                    }
+                    return null; // 형식이 유효하면 null 반환
+                  },
+                  hintText: '  이메일를 입력해주세요.',
+                  obscureText: false,
+                ),
               ),
-            ),
-            SizedBox(height: 40),
-            SignUpButton(
-              onSignUpPressed: () async {
-                await _signup();
-                context.pop();
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (context) => LoginPage(),
-                );
-              },
-            ),
-            SizedBox(height: 20),
-          ],
+              SizedBox(height: 20),
+              SignUpButton(
+                onSignUpPressed: () async {
+                  if (_formKey.currentState!.validate()) {
+                    await _signup();
+                    context.pop();
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) => LoginPage(),
+                    );
+                  }
+                },
+              ),
+              SizedBox(height: 20),
+            ],
+          ),
         ),
       ),
     );
@@ -134,8 +172,8 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
 class SignUpButton extends StatelessWidget {
   final VoidCallback onSignUpPressed;
 
-  const SignUpButton({Key? key, required this.onSignUpPressed}) : super(key: key);
-
+  const SignUpButton({Key? key, required this.onSignUpPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -145,10 +183,10 @@ class SignUpButton extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
             child: TextButton(
-              onPressed: onSignUpPressed,// 현재 대화 상자를 닫음
+              onPressed: onSignUpPressed, // 현재 대화 상자를 닫음
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith<Color>(
-                      (Set<MaterialState> states) {
+                  (Set<MaterialState> states) {
                     if (states.contains(MaterialState.pressed))
                       return DEVELOPER_COLOR; // 클릭했을 때의 색상
                     return INPUT_BG_COLOR; // 기본 색상

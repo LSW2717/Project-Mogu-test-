@@ -31,4 +31,8 @@ public class Contest {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "img_url")
+    private String imgUrl;
+
 }

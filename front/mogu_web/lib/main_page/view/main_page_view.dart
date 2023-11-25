@@ -13,40 +13,46 @@ class MainPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final contestModelList = ref.watch(contestModelProvider);
-     final loginState = ref.watch(authViewModelProvider);
+    final loginState = ref.watch(authViewModelProvider);
 
     return DefaultLayout(
       title: 'main page',
       child: Center(
         child: contestModelList.when(
-          data: (dataList) => ListView.builder(
-            itemCount: dataList.length,
-            itemBuilder: (context, index) {
-              final contest = dataList[index];
-              return ContestCard(
-                name: contest.name,
-                category: contest.category,
-                endDate: contest.endDate,
-                url: contest.url,
-                onTap: () async {
-                  if (loginState.loginResponse != null) {
-                    // 로그인이 되어 있으면 URL을 엽니다.
-                    bool launched = await launchUrl(Uri.parse(contest.url));
-                    if (!launched) {
-                      throw 'Could not launch ${contest.url}';
+          data: (dataList) {
+            if (dataList.isEmpty) {
+              return Text('현재 진행중인 대회가 없습니다.');
+            }
+            return ListView.builder(
+              itemCount: dataList.length,
+              itemBuilder: (context, index) {
+                final contest = dataList[index];
+                return ContestCard(
+                  name: contest.name,
+                  category: contest.category,
+                  endDate: contest.endDate,
+                  url: contest.url,
+                  imgUrl: contest.imgUrl,
+                  onTap: () async {
+                    if (loginState.isLoggedIn) {
+                      // 로그인이 되어 있으면 URL을 엽니다.
+                      bool launched = await launchUrl(Uri.parse(contest.url));
+                      if (!launched) {
+                        throw 'Could not launch ${contest.url}';
+                      }
+                    } else {
+                      // 로그인이 되어 있지 않으면 로그인 페이지를 띄웁니다.
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => LoginPage(),
+                      );
                     }
-                  } else {
-                    // 로그인이 되어 있지 않으면 로그인 페이지를 띄웁니다.
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) => LoginPage(),
-                    );
-                  }
-                },
-              );
-            },
-          ),
+                  },
+                );
+              },
+            );
+          },
           loading: () => CircularProgressIndicator(),
           error: (e, _) => Text('Error: $e'),
         ),

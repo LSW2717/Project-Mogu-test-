@@ -26,7 +26,7 @@ public class ContestController {
     public ResponseEntity<ContestApiResponseDto<List<ContestResponseDto>>> getAllContests() {
         List<Contest> contests = contestService.getContests();
         List<ContestResponseDto> contestDtos = contests.stream()
-                .map(contest -> new ContestResponseDto(contest.getId(), contest.getName(), contest.getCategory(),contest.getEndDate(), contest.getUrl()))
+                .map(contest -> new ContestResponseDto(contest.getId(), contest.getName(), contest.getCategory(),contest.getEndDate(), contest.getUrl(), contest.getImgUrl()))
                 .collect(Collectors.toList());
         ContestApiResponseDto<List<ContestResponseDto>> response = new ContestApiResponseDto<>();
         response.setData(contestDtos);

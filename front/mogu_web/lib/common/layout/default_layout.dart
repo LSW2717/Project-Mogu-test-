@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mogu_web/login_page/viewModel/auth_view_model.dart';
-
+import 'package:go_router/go_router.dart';
 class DefaultLayout extends ConsumerWidget {
   final Color? backgroundColor;
   final Widget child;
@@ -53,7 +53,7 @@ class DefaultLayout extends ConsumerWidget {
             Padding(
               padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
               child: Text(
-                userName != null ? "안녕하세요 $userName님!" : "로그인 후 사용가능합니다.",
+                userName != null ? "$userName님" : "로그인",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 25,
@@ -65,7 +65,7 @@ class DefaultLayout extends ConsumerWidget {
             ),
           ],
         ),
-        automaticallyImplyLeading: false,
+        automaticallyImplyLeading: true,
         backgroundColor: Color(0xFF005BAC),
         toolbarHeight: 76,
       );
