@@ -11,26 +11,27 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return DefaultLayout(
       title: 'start page',
+      bottomNavigationBar: const Text3(),
       child: Column(
         children: <Widget>[
-          Expanded(
+          const Expanded(
             flex: 355,
             child: ImageGradation(),
           ),
-          SizedBox(height: 12),
+          const SizedBox(height: 12),
           Expanded(
             flex: 589,
             child: Column(
               children: [
-                Text1(),
-                SizedBox(height: 19),
-                Text2(),
-                SizedBox(height: 50),
+                const Text1(),
+                const SizedBox(height: 19),
+                const Text2(),
+                const SizedBox(height: 50),
                 TextButton(
                   onPressed: () {
                     context.go('/main');
                   },
-                  child: Text('시작하기 >',
+                  child: const Text('시작하기 >',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
@@ -45,7 +46,6 @@ class StartPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: Text3(),
     );
   }
 }
@@ -58,7 +58,7 @@ class ImageGradation extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Image.asset(
-          'assets/img/inhaUniversity.jpeg',
+          'asset/img/inhaUniversity.jpeg',
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
@@ -66,13 +66,14 @@ class ImageGradation extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment(0.00, -1.00),
-              end: Alignment(0, 1),
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
-                Colors.white.withOpacity(0),
-                Colors.white.withOpacity(0.699999988079071),
-                Colors.white.withOpacity(0.8999999761581421),
-                Colors.white,
+                Colors.white.withOpacity(0.0), // 시작: 약간 투명한 흰색
+                Colors.white.withOpacity(0.4),
+                Colors.white.withOpacity(0.7),
+                Colors.white.withOpacity(0.9),
+                Colors.white.withOpacity(1.0),
               ],
               tileMode: TileMode.clamp,
             ),
@@ -84,9 +85,11 @@ class ImageGradation extends StatelessWidget {
 }
 
 class Text1 extends StatelessWidget {
+  const Text1({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Text.rich(
           TextSpan(
@@ -131,6 +134,8 @@ class Text1 extends StatelessWidget {
 }
 
 class Text2 extends StatelessWidget {
+  const Text2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -138,7 +143,7 @@ class Text2 extends StatelessWidget {
         Text.rich(
           TextSpan(
             children: [
-              TextSpan(
+              const TextSpan(
                 text: '프로젝트를 함께 진행할 ',
                 style: TextStyle(
                   color: Colors.black,
@@ -159,7 +164,7 @@ class Text2 extends StatelessWidget {
                   background: Paint()..color = DEVELOPER_COLOR,
                 ),
               ),
-              TextSpan(
+              const TextSpan(
                 text: ' / ',
                 style: TextStyle(
                   color: Colors.black,
@@ -181,7 +186,7 @@ class Text2 extends StatelessWidget {
                 ),
 
               ),
-              TextSpan(
+              const TextSpan(
                 text: '를\n',
                 style: TextStyle(
                   color: Colors.black,
@@ -191,7 +196,7 @@ class Text2 extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
-              TextSpan(
+              const TextSpan(
                 text: 'mogu',
                 style: TextStyle(
                   color: Colors.black,
@@ -201,7 +206,7 @@ class Text2 extends StatelessWidget {
                   height: 1.5,
                 ),
               ),
-              TextSpan(
+              const TextSpan(
                 text: '와 함께 모집하고 구해보세요!',
                 style: TextStyle(
                   color: Colors.black,
@@ -221,12 +226,14 @@ class Text2 extends StatelessWidget {
 }
 
 class Text3 extends StatelessWidget {
+  const Text3({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white, // 배경색 설정
-      padding: EdgeInsets.all(40), // 패딩 설정
-      child: Text(
+      padding: const EdgeInsets.all(40), // 패딩 설정
+      child: const Text(
         '참여 정보는 저희 프로젝트를 발전시키기 위한 자료로 \n쓰일 수 있음을 알려드립니다.',
         textAlign: TextAlign.center,
         style: TextStyle(

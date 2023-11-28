@@ -14,6 +14,10 @@ final router = GoRouter(
         GoRoute(
           path: 'main',
           builder: (context, state) => MainPage(),
+          pageBuilder: (context, state) => NoTransitionPage<void>(
+            key: state.pageKey,
+            child: MainPage(),
+          ),
         ),
       ],
     ),

@@ -35,7 +35,7 @@ class DefaultLayout extends ConsumerWidget {
     }else{
       return AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
               padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
@@ -50,22 +50,22 @@ class DefaultLayout extends ConsumerWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
-              child: Text(
-                userName != null ? "$userName님" : "로그인",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontFamily: 'Pretendard',
-                  fontWeight: FontWeight.w700,
-                  height: 0,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.only(left: 33 - 16, bottom: 10),
+            //   child: Text(
+            //     userName != null ? "$userName님" : "로그인",
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //       fontSize: 25,
+            //       fontFamily: 'Pretendard',
+            //       fontWeight: FontWeight.w700,
+            //       height: 0,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Color(0xFF005BAC),
         toolbarHeight: 76,
       );

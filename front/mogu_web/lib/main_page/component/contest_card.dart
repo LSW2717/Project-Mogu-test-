@@ -99,7 +99,7 @@ class ContestCard extends StatelessWidget {
                         ),
                         if (category == 'inha') // 조건 체크
                           Image.asset(
-                            'assets/img/inha_logo.png',
+                            'asset/img/inha_logo.png',
                             height: 41,
                             width: 41,
                           ),

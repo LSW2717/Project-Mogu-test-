@@ -21,7 +21,7 @@ class MainPage extends ConsumerWidget {
         child: contestModelList.when(
           data: (dataList) {
             if (dataList.isEmpty) {
-              return Text('현재 진행중인 대회가 없습니다.');
+              return const Text('현재 진행중인 대회가 없습니다.');
             }
             return ListView.builder(
               itemCount: dataList.length,
@@ -34,26 +34,30 @@ class MainPage extends ConsumerWidget {
                   url: contest.url,
                   imgUrl: contest.imgUrl,
                   onTap: () async {
-                    if (loginState.isLoggedIn) {
-                      // 로그인이 되어 있으면 URL을 엽니다.
-                      bool launched = await launchUrl(Uri.parse(contest.url));
+                    // if (loginState.isLoggedIn) {
+                    //   // 로그인이 되어 있으면 URL을 엽니다.
+                    //   bool launched = await launchUrl(Uri.parse(contest.url));
+                    //   if (!launched) {
+                    //     throw 'Could not launch ${contest.url}';
+                    //   }
+                    // } else {
+                    //   // 로그인이 되어 있지 않으면 로그인 페이지를 띄웁니다.
+                    //   showDialog(
+                    //     context: context,
+                    //     barrierDismissible: false,
+                    //     builder: (context) => LoginPage(),
+                    //   );
+                    // }
+                    bool launched = await launchUrl(Uri.parse(contest.url));
                       if (!launched) {
                         throw 'Could not launch ${contest.url}';
                       }
-                    } else {
-                      // 로그인이 되어 있지 않으면 로그인 페이지를 띄웁니다.
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => LoginPage(),
-                      );
-                    }
                   },
                 );
               },
             );
           },
-          loading: () => CircularProgressIndicator(),
+          loading: () => const CircularProgressIndicator(),
           error: (e, _) => Text('Error: $e'),
         ),
       ),
