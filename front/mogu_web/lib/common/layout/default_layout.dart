@@ -34,7 +34,7 @@ class DefaultLayout extends ConsumerWidget {
       return null;
     }else{
       return AppBar(
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             Padding(
@@ -65,8 +65,8 @@ class DefaultLayout extends ConsumerWidget {
             // ),
           ],
         ),
-        automaticallyImplyLeading: false,
-        backgroundColor: Color(0xFF005BAC),
+        automaticallyImplyLeading: true,
+        backgroundColor: const Color(0xFF005BAC),
         toolbarHeight: 76,
       );
     }

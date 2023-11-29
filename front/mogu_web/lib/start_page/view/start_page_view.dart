@@ -31,7 +31,8 @@ class StartPage extends StatelessWidget {
                   onPressed: () {
                     context.go('/main');
                   },
-                  child: const Text('시작하기 >',
+                  child: const Text(
+                    '시작하기 >',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 17,
@@ -53,15 +54,19 @@ class StartPage extends StatelessWidget {
 class ImageGradation extends StatelessWidget {
   const ImageGradation({super.key});
 
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image.asset(
-          'asset/img/inhaUniversity.jpeg',
-          fit: BoxFit.cover,
-          width: double.infinity,
-          height: double.infinity,
+        Container(
+          margin: EdgeInsets.fromLTRB(0, 0, 0, 1),
+          child: Image.asset(
+            'asset/img/inhaUniversity.jpeg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
+          ),
         ),
         Container(
           decoration: BoxDecoration(
@@ -184,7 +189,6 @@ class Text2 extends StatelessWidget {
                   height: 1.5,
                   background: Paint()..color = DEGIGNER_COLOR,
                 ),
-
               ),
               const TextSpan(
                 text: '를\n',
@@ -240,7 +244,7 @@ class Text3 extends StatelessWidget {
           fontSize: 11, // 글자 크기 설정
           color: Colors.grey,
           fontFamily: 'Pretendard',
-          fontWeight: FontWeight.w500,// 글자 색상 설정
+          fontWeight: FontWeight.w500, // 글자 색상 설정
         ),
       ),
     );
